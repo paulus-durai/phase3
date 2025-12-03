@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  abc-telecom-postpaid-billing:
+    image: abc-telecom-postpaid-billing:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - DATABASE_URL=jdbc:h2:mem:testdb
+      - DATABASE_DRIVER=org.h2.Driver
+      - DATABASE_USERNAME=sa
+      - DATABASE_PASSWORD=password
+    networks:
+      - abc-network
+
+networks:
+  abc-network:
+    driver: bridge
